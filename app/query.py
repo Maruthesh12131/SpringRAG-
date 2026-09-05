@@ -114,7 +114,7 @@ results = collection.query(
         query_embedding
     ],
 
-    n_results=5
+    n_results=10
 )
 
 retrieved_ids = results["ids"][0]
@@ -148,7 +148,7 @@ for i in range(len(retrieved_ids)):
 
 expanded_chunk_ids = set()
 
-for chunk_id in retrieved_ids:
+for chunk_id in retrieved_ids[:3]:
 
     # Example:
     # chunk_39 → 39

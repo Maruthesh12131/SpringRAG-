@@ -14,3 +14,7 @@ data/chroma/
 .DS_Store
 .idea/
 .vscode/
+
+# Node
+node_modules/
+frontend/dist/

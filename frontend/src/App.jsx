@@ -65,11 +65,18 @@ export default function App() {
     endRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' })
   }, [messages, loading])
 
+
+  function generateId() {
+    if(crypto.randomUUID){
+      return crypto.randomUUID();
+    }
+    return `${Date.now()}-${Math.random().toString(36).substring(2)}`;
+  }
   const send = async () => {
     const question = input.trim()
     if (!question || loading) return
 
-    setMessages((prev) => [...prev, { id: crypto.randomUUID(), role: 'user', content: question }])
+    setMessages((prev) => [...prev, { id: generateId(), role: 'user', content: question }])
     setInput('')
     setLoading(true)
 

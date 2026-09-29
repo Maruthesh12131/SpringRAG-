@@ -67,7 +67,7 @@ export default function App() {
 
 
   function generateId() {
-    if(crypto.randomUUID){
+    if(typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function'){
       return crypto.randomUUID();
     }
     return `${Date.now()}-${Math.random().toString(36).substring(2)}`;
@@ -82,9 +82,9 @@ export default function App() {
 
     try {
       const answer = await askQuestion(question)
-      setMessages((prev) => [...prev, { id: crypto.randomUUID(), role: 'assistant', content: answer }])
+      setMessages((prev) => [...prev, { id: generateId(), role: 'assistant', content: answer }])
     } catch (err) {
-      setMessages((prev) => [...prev, { id: crypto.randomUUID(), role: 'error', content: err.message }])
+      setMessages((prev) => [...prev, { id: generateId(), role: 'error', content: err.message }])
     } finally {
       setLoading(false)
       textareaRef.current?.focus()
